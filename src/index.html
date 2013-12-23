@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20131220</title>
+    <style>
+        #main{
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        canvas{
+            margin-left: 0;
+            background-color: black;
+        }
+        #fields{
+            float: right;
+            max-width: 300px;
+            font-family: Monaco;
+            background-color: Aqua;
+        }
+        .category{
+            font-weight: bold;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        #star1{
+            color: Red;
+        }
+        #star2{
+            color: Yellow;
+        }
+        #star3{
+            color: Blue;
+        }
+        #fields p{
+            background: #aa78dd;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+        #fields label{
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            margin-left: 8px;
+        }
+        #fields input[type="text"]{
+            margin-right: 10px;
+        }
+        input[type="button"]{
+            width: 120px;
+            font-size: 30px;
+        }
+    </style>
+    <script src="./scripts/three-body.js"></script>
+</head>
+<body>
+    <div id="main">
+        <h1>20131220</h1>
+        <div id="fields">
+            <p>Input parameters</p>
+            <label for="" id="star1" class="category">Star1</label><br />
+            <label for="">Mass: </label>
+            <input id="mass1" type="text" value="40.0"><br />
+            <label for="">x: </label>
+            <input id="star1X" type="text" value="350.0"><br />
+            <label for="">y: </label>
+            <input id="star1Y" type="text" value="200.0"><br />
+            <label for="">speed.x</label>
+            <input id="speed1X" type="text" value="0.8"><br />
+            <label for="">speed.y</label>
+            <input id="speed1Y" type="text" value="-1.2"><br /><br />
+            <label for="" id="star2" class="category">Star2</label><br />
+            <label for="">Mass: </label>
+            <input id="mass2" type="text" value="38.86"><br />
+            <label for="">x: </label>
+            <input id="star2X" type="text" value="450.0"><br />
+            <label for="">y: </label>
+            <input id="star2Y" type="text" value="350.0"><br />
+            <label for="">speed.x</label>
+            <input id="speed2X" type="text" value="-0.5"><br />
+            <label for="">speed.y</label>
+            <input id="speed2Y" type="text" value="1.2"><br /><br />
+            <label for="" id="star3" class="category">Star3</label><br />
+            <label for="">Mass: </label>
+            <input id="mass3" type="text" value="20.0"><br />
+            <label for="">x: </label>
+            <input id="star3X" type="text" value="380.0"><br />
+            <label for="">y: </label>
+            <input id="star3Y" type="text" value="250.0"><br />
+            <label for="">speed.x</label>
+            <input id="speed3X" type="text" value="-1"><br />
+            <label for="">speed.y</label>
+            <input id="speed3Y" type="text" value="0.1"><br />
+            <input id="stop" type="button" value="Stop"><br />
+            <input id="run" type="button" value="Run">
+        </div>
+        <canvas id="myCanvas" width="800" height="700"></canvas>
+    </div>
+</body>
+</html>
