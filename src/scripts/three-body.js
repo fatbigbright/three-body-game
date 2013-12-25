@@ -139,6 +139,30 @@ window.onload = function(){
     var speed3X = document.getElementById('speed3X');
     var speed3Y = document.getElementById('speed3Y');
 
+    var check_fixed_coordinate = document.getElementById('check_fixed_coordinate');
+    var fixed_red = document.getElementById('red');
+    var fixed_yellow = document.getElementById('yellow');
+    var fixed_blue = document.getElementById('blue');
+    check_fixed_coordinate.checked = false;
+    fixed_red.disabled = true;
+    fixed_yellow.disabled = true;
+    fixed_blue.disabled = true;
+    check_fixed_coordinate.onclick = function(){
+        if(check_fixed_coordinate.checked){
+            fixed_red.disabled = false;
+            fixed_yellow.disabled = false;
+            fixed_blue.disabled = false;
+        }else{
+            fixed_red.disabled = true;
+            fixed_yellow.disabled = true;
+            fixed_blue.disabled = true;
+
+            fixed_red.checked = false;
+            fixed_yellow.checked = false;
+            fixed_blue.checked = false;
+        }
+    };
+
     var token;
     run.onclick = function(){
         run.value = 'running';
