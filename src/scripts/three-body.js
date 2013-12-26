@@ -28,7 +28,7 @@ function circle(canvas, x, y, radius, color, mass){
         speed_y += g_y;
     };
 
-    this.draw = function(){
+    this.draw = function(drawCallback){
         if(up_flag){
             speed_y += -step; 
             up_flag = false;
@@ -77,6 +77,9 @@ function circle(canvas, x, y, radius, color, mass){
         gradient.addColorStop(0, 'white');
         gradient.addColorStop(1, color);
         
+        if(drawCallback != null){
+            drawCallback(this);
+        }
         context.fillStyle = gradient;
         context.beginPath();
         //x, y,radius, startAngle, endAngle, counterclockwise
@@ -167,6 +170,10 @@ window.onload = function(){
     run.onclick = function(){
         run.value = 'running';
         run.disabled = true;
+        check_fixed_coordinate.disabled = true;
+        fixed_red.disabled = true;
+        fixed_yellow.disabled = true;
+        fixed_blue.disabled = true;
         var star1 = new circle(canvas, parseFloat(star1X.value), parseFloat(star1Y.value), 10, 'Red', parseFloat(mess1.value));
         var star2 = new circle(canvas, parseFloat(star2X.value), parseFloat(star2Y.value), 10, 'Yellow', parseFloat(mess2.value));
         var star3 = new circle(canvas, parseFloat(star3X.value), parseFloat(star3Y.value), 10, 'Blue', parseFloat(mess3.value));
@@ -187,14 +194,40 @@ window.onload = function(){
                    clearInterval(token);
                    run.value = 'Run';
                    run.disabled = false;
+                   check_fixed_coordinate.disabled = false;
+                   if(check_fixed_coordinate.checked){
+                       fixed_red.disabled = false;
+                       fixed_yellow.disabled = false;
+                       fixed_blue.disabled = false;
+                   }
             }
             star1.massEffect(g_12.star_g_x + g_31.planet_g_x, g_12.star_g_y + g_31.planet_g_y);
             star2.massEffect(g_12.planet_g_x + g_23.star_g_x, g_12.planet_g_y + g_23.star_g_y);
             star3.massEffect(g_31.star_g_x + g_23.planet_g_x, g_31.star_g_y + g_23.planet_g_y);
 
-            star1.draw();
-            star2.draw();
-            star3.draw();
+            var x_fixed = 0;
+            var y_fixed = 0;
+            if(check_fixed_coordinate.checked){
+                if(fixed_red.checked){
+                    x_fixed = canvas.width/2 - star1.x;
+                    y_fixed = canvas.height/2 - star1.y;
+                }
+                else if(fixed_yellow.checked){
+                    x_fixed = canvas.width/2 - star2.x;
+                    y_fixed = canvas.height/2 - star2.y;
+                }
+                else if(fixed_blue.checked){
+                    x_fixed = canvas.width/2 - star3.x;
+                    y_fixed = canvas.height/2 - star3.y;
+                }
+            }
+            var drawCallback = function(star){
+                star.x += x_fixed;
+                star.y += y_fixed;
+            };
+            star1.draw(drawCallback);
+            star2.draw(drawCallback);
+            star3.draw(drawCallback);
         }, 1000/30);
     };
     stop.onclick = function(){
@@ -202,5 +235,12 @@ window.onload = function(){
         context.clearRect(0, 0, canvasWidth, canvasHeight);
         run.value = 'Run';
         run.disabled = false;
+
+        check_fixed_coordinate.disabled = false;
+        if(check_fixed_coordinate.checked){
+            fixed_red.disabled = false;
+            fixed_yellow.disabled = false;
+            fixed_blue.disabled = false;
+        }
     };
 }
